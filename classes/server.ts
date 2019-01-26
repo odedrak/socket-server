@@ -25,6 +25,7 @@ export default class Server {
 
         this.io = socketIO(this.httpServer);
         this.escucharSockets();
+
     }
 
     // para patron singleton
@@ -39,7 +40,7 @@ export default class Server {
         this.io.on('connection', cliente => {
 
             // Conectar cliente
-            socket.conectarCliente(cliente);
+            socket.conectarCliente(cliente, this.io);
 
             // Configurar usuario
             socket.configurarUsuario(cliente, this.io);
@@ -47,9 +48,11 @@ export default class Server {
             // Mensajes
             socket.mensaje(cliente, this.io);
 
-
             // Desconectar
-            socket.desconectar(cliente);
+            socket.desconectar(cliente, this.io);
+
+            // Escuchar solicitudes de actualizacion de lista de usuarios
+            socket.obtenerUsuarios(cliente, this.io);
 
             
         });

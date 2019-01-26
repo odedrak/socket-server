@@ -7,7 +7,7 @@ export class UsuariosLista {
 
     public agregar(usuario: Usuario) {
         this.lista.push(usuario);
-        console.log(this.lista);
+        //console.log(this.lista);
         return usuario;
     }
 
@@ -19,12 +19,11 @@ export class UsuariosLista {
             }
         }
         
-        console.log('==== Actualizando usuario ====');
-        console.log(this.lista);
+        console.log(`==== Actualizando usuario <${nombre}>====`);
     }
 
     public getLista() {
-        return this.lista;
+        return this.lista.filter(usuario => usuario.nombre !== 'sin-nombre');
     }
 
     public getUsuario(id: string) {
